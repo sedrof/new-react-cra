@@ -1,0 +1,19 @@
+
+
+
+.outter{
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+.family_group_slice {
+    /* justify-content: flex-start; */
+}
+
+.family_member_slice {
+    /* justify-content: flex-end;; */
+    transform: translate(-100px, -30px);
+    /* transform: translateY(10px); */
+}

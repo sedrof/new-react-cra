@@ -1,0 +1,86 @@
+.container{
+    transform: translate(50px);
+    margin-top: 100px;
+    margin-bottom: 20px;
+    
+}
+.col-lg-12{
+    border-radius: 20px!important;
+    width: 60%;
+    margin-top: 50px;
+    
+    }
+
+li{
+    border-radius: 20px !important;
+    margin-top: 20px;
+}
+.btn{
+    transform: translate(0px, 0px);
+    background-color: #2ca58d;
+    border-radius: 20px;
+    border-color: #ffff;
+    hover-border-color: #FFFF;
+    outline: none !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.btn:hover{
+    color: #ffff;
+    background-color: #2ca58d;
+}
+
+.inside-box{
+    font-size: 1em;
+}
+.inside-box-drop{
+    font-size: 1em;
+}
+.drops{
+    border: 0;
+    background-color: red;
+}
+.col-lg-0{
+    margin-top: 50px;
+
+    width: 80%;
+}
+
+.btn-upload{
+    width:80%;
+    margin-top:5px
+}
+.upload-header{
+    margin-top:100px;
+    font-size: 14px;
+    align-items: center;
+}
+.upload-header-h1{
+    font-size: 2rem;
+    font-family: 'GT Walsheim';
+    font-style: normal;
+    font-weight: 400;
+    src: local('GT Walsheim'), url('https://fonts.cdnfonts.com/s/39241/GTWALSHEIM.woff') format('woff');
+    text-align: center;
+}
+.list-group{
+    transform: translate(100px);
+}
+
+.Mui-disabled { background-color: blue; }
+
+button{
+    background-color: #2ca58d;
+    border-radius: 20px;
+    border-color: #ffff;
+    hover-border-color: #FFFF;
+    outline: none !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+/* button:disabled {
+    background-color:#bdbbbb;
+} */
+

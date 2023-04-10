@@ -1,0 +1,18 @@
+ 
+body,html {
+    background-color: #FAFAFA ;
+    height: 100%;
+    width: 100%;
+}
+#root{
+    height: 100%;
+    width: 100%;
+}
+@font-face {
+    font-family: 'GT Walsheim';
+    font-style: normal;
+    font-weight: 400;
+    src: local('GT Walsheim'), url('https://fonts.cdnfonts.com/s/39241/GTWALSHEIM.woff') format('woff');
+}
+
+.Mui-disabled { background-color: blue; }

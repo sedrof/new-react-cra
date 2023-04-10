@@ -1,0 +1,27 @@
+.active-link {
+    text-decoration: none;
+  }
+
+.normal-link {
+    text-decoration: none;
+  }
+
+.input-field:focus {
+  border-color: #2ca58d;
+}
+  
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper .toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+input form-control:focus{
+  border-color: #2ca58d;
+}

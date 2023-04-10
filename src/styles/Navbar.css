@@ -1,0 +1,29 @@
+
+.logo{
+    margin-left: 1rem;
+    color: #2ca58d;
+    top: -14;
+    margin-top: 50vw;
+
+/* Z-index: -999 */
+}   
+
+.logo:hover{
+    color: #2ca58d;
+}
+.profile{
+    display: flex;
+    position: fixed;
+    flex-basis: auto;
+    right: -51;
+    transform: translateX(80vw);
+}
+
+.nav-link-profile{
+    text-decoration: none;
+    color: #2ca58d
+}
+.nav-link-profile:hover{
+    text-decoration: none;
+    color: #2ca58d
+}
