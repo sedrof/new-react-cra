@@ -186,7 +186,7 @@ export default function Faq() {
             interact with our service programmatically. Our API documentation
             provides detailed information on how to get started, authentication,
             available endpoints, and response formats. Please refer to the{" "}
-            <a href="http://localhost:8000/api-documentation/">API documentation</a> for more
+            <a href="https://cra-calc.azurewebsites.net/api-documentation/">API documentation</a> for more
             information.
           </p>
         </div>

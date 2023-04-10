@@ -146,7 +146,7 @@ const ParseFile = (props) => {
                 )
                 .required("required"),
               family_member_date_of_birth:
-                Yup.date("date").required("required"),
+                Yup.date("date").required("required").max(new Date(), "Date of birth should be less than or equal to today's date"),
               family_member_income: Yup.number("must be a number"),
             })
           ).test(

@@ -68,6 +68,7 @@ export default function EditForm() {
   const [transaction, setTransaction] = React.useState();
   const [showSuccessMessage, setShowSuccessMessage] = React.useState(false);
   const [showErrorMessage, setShowErrorMessage] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [showResponseMessage, setShowResponseMessage] = React.useState("");
   const navigate = useNavigate();
 
@@ -75,7 +76,6 @@ export default function EditForm() {
   const { ids } = useParams();
   console.log(errors, "errors");
   React.useEffect(() => {
-    console.log(errors, "errors");
     const api = async (objID) => {
       const res = await dispatch(getSingleTransaction(ids))
         .then((data) => {
@@ -87,17 +87,11 @@ export default function EditForm() {
         });
     };
     if (ids) {
-      console.log("its idss", ids);
       api(ids);
+      setIsLoading(false);
     }
   }, [errors]);
-  function showErrors(errors) {
-    return Object.keys(errors)?.map((err, index) => (
-      <ul key={index} className="ml-5">
-        <li className="list-disc">{errors[err].message}</li>
-      </ul>
-    ));
-  }
+  
 
   const [open, setOpen] = React.useState(true);
 
@@ -127,7 +121,7 @@ export default function EditForm() {
 
   return (
     <div>
-      <ThemeProvider theme={Theme}>
+      {transaction? <ThemeProvider theme={Theme}>
         <Dialog
           PaperProps={{
             style: {
@@ -136,7 +130,7 @@ export default function EditForm() {
           }}
           sx={{ position: "fixed" }}
           fullScreen
-          open={open}
+          open='true'
           onClose={handleClose}
         >
           <AppBar sx={{ position: "fixed" }}>
@@ -300,7 +294,7 @@ export default function EditForm() {
             </StyledPaper>
           </form>
         </Dialog>
-      </ThemeProvider>
+      </ThemeProvider> : <div>Loading...</div>}
     </div>
   );
 }
