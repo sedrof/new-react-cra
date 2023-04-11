@@ -8,7 +8,6 @@ import Navbar from "./navbar";
 
 const Layout = ({ title, content, children }) => {
   const { loading, uploadStatus } = useSelector((state) => state.api);
-  const [showSuccessMessage, setShowSuccessMessage] = React.useState(false);
   const dispatch = useDispatch();
   return (
     <React.Fragment>

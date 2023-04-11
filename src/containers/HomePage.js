@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { Navigate, NavLink } from "react-router-dom";
 import Layout from "components/Layout";
 import "styles/HomePage.css";
-import myPic from "../assets/ds.png";
-import myUpload from "../assets/upload.png";
+import upload from "../assets/upload.jpg";
+import myPic from "../assets/trans.jpg";
 
 
 const HomePage = () => {
@@ -117,7 +117,7 @@ const HomePage = () => {
             </div>
             <div style={{ flex: 1, textAlign: "right" }}>
               <img
-                src={myUpload}
+                src={upload}
                 alt="calculator"
                 style={{ height: "130px" }}
               />

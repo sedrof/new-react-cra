@@ -13,6 +13,27 @@ const AppPagination = (props) => {
         style={{
           display: "flex",
           justifyContent: "center",
+          // backgroundColor: "#2ca58d", // set background color
+          '& .Mui-selected': { // set styles for selected page
+            backgroundColor: "#2ca58d",
+            color: "white",
+            '&:hover': { // set styles for hover on selected page
+              backgroundColor: "#2ca58d",
+              color: "white",
+            },
+          },
+          '& .MuiPaginationItem-page:hover': { // set styles for hover on non-selected pages
+            // backgroundColor: "#2ca58d",
+            color: "white",
+          },
+          '& .MuiPaginationItem-root': { // set border radius and margin for all pages
+            borderRadius: "50%",
+            margin: "0 4px",
+          },
+          '& .Mui-selected.MuiPaginationItem-root': { // set border radius and margin for selected page
+            borderRadius: "50%",
+            margin: "0 4px",
+          },
         }}
         shape="rounded"
         variant="outlined"

@@ -28,6 +28,7 @@ import { getSingleTransaction, singleUpdateTransaction } from "features/api";
 import { incomeOptions } from "Data/IncomePeriodSelect";
 import validationSchema from "components/ValidationSchema";
 import { Theme } from "theme";
+import EditLoading from "components/TransactionEditLoading";
 
 const MyButton = styled(Button)`
   &&& {
@@ -294,7 +295,7 @@ export default function EditForm() {
             </StyledPaper>
           </form>
         </Dialog>
-      </ThemeProvider> : <div>Loading...</div>}
+      </ThemeProvider> : <EditLoading/>}
     </div>
   );
 }

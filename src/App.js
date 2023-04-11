@@ -11,7 +11,6 @@ import TransactionsListPage from "containers/TransactionList";
 import EditForm from "components/TransactionEdit2";
 import Faq from "containers/Faq";
 import Profile from "containers/Profile";
-import TransactionForm, { AppAdd } from "components/Add3";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ const App = (props) => {
         <Route path="/list" element={<TransactionsListPage />} />
         <Route path="/FAQ" element={<Faq />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/add3" element={<TransactionForm />} />
       </Routes>
     </Router>
   );

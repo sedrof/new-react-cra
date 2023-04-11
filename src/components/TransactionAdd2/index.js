@@ -150,7 +150,7 @@ export default function NewForm() {
         color="primary"
         size="large"
         style={{
-          color: "green",
+          color: "#2ca58d",
         }}
         sx={{
           transform: {
@@ -166,7 +166,7 @@ export default function NewForm() {
         startIcon={
           <AddCircle
             style={{
-              color: "green",
+              color: "#2ca58d",
             }}
           />
         }

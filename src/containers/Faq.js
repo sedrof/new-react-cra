@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 import { NavLink, Navigate } from "react-router-dom";
 import Layout from "components/Layout";
 import ReactPlayer from "react-player";
-import { Paper } from "@mui/material";
+import { Paper, Breadcrumbs, Typography } from "@mui/material";
 import "../styles/faq.css";
 import "styles/breadcrumb.css";
 
 function VideoPlayer() {
   return (
-    <Paper className="faq-video-container">
       <div className="video-container">
         <ReactPlayer
           url={"https://www.dailymotion.com/video/k16NnCyUWHDXjEz0aJF"}
@@ -19,7 +18,6 @@ function VideoPlayer() {
           controls={true}
         />
       </div>
-    </Paper>
   );
 }
 
@@ -34,15 +32,12 @@ export default function Faq() {
   return (
     <Layout title="FAQ." content="FAQ">
       <div role="presentation">
-        <div className="breadcrumbs-container">
+      <Breadcrumbs aria-label="breadcrumb">
           <NavLink className="nav-link-faq" to="/">
             Home
           </NavLink>
-
-          <span className="breadcrumb-separator">/</span>
-
-          <span className="faq-breadcrumb">FAQ</span>
-        </div>
+          <Typography color="text.primary">FAQ</Typography>
+        </Breadcrumbs>
       </div>
       <div className="faq-container">
         <div className="video-player">

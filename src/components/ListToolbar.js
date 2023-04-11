@@ -4,7 +4,6 @@ import {
   Grid,
   Typography,
   Divider,
-
 } from "@mui/material";
 import SearchBar from "material-ui-search-bar";
 import FileDownloads from "./TransactionDownload";

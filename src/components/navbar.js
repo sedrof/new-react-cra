@@ -43,7 +43,7 @@ const Navbar = () => {
               height: "40px",
             }}
             style={{
-              color: "green",
+              color: "2ca58d",
             }}
           >
             <AccountCircle />
