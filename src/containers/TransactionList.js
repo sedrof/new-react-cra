@@ -61,9 +61,15 @@ const TransactionsListPage = (props) => {
           // setRandomDelete={setRandomDelete}
         />
         <Box sx={{ mt: 3 }}>
-          {loading ? (
-            <ListLoading />
-          ) : (
+          {
+          // loading ? (
+          //   <ListLoading 
+          //   setPage={setPage}
+          //     page={page}
+          //     counts={counts}/>
+              
+          // ) :
+           (
             <TransactionListResults
               updateIds={updateIds}
               loading={loading}

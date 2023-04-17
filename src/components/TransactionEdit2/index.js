@@ -19,6 +19,8 @@ import {
   Toolbar,
   IconButton,
   ThemeProvider,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 import Fields from "components/FieldArray";
 import { FormInputText } from "components/TextFieldInput";
@@ -59,7 +61,7 @@ export default function EditForm() {
     register,
     handleSubmit,
     getValues,
-    errors,
+    formState: { errors },
     reset,
     setValue,
     useWatch,
@@ -75,7 +77,7 @@ export default function EditForm() {
 
   const dispatch = useDispatch();
   const { ids } = useParams();
-  console.log(errors, "errors");
+  console.log(errors , "errors");
   React.useEffect(() => {
     const api = async (objID) => {
       const res = await dispatch(getSingleTransaction(ids))
@@ -91,7 +93,7 @@ export default function EditForm() {
       api(ids);
       setIsLoading(false);
     }
-  }, [errors]);
+  }, []);
   
 
   const [open, setOpen] = React.useState(true);
@@ -194,6 +196,18 @@ export default function EditForm() {
                 {showErrorMessage && (
                   <div style={{color:'red'}}>{showResponseMessage}</div>
                 )}
+                {errors.familyGroup && (
+              <Alert
+                severity="error"
+              >
+                {errors.familyGroup.map((msg) => (
+                  <>
+                    <AlertTitle>Error</AlertTitle>
+                    <div>{msg.nestedArray?.message}</div>
+                  </>
+                ))}
+              </Alert>
+            )}
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <StyledPaper

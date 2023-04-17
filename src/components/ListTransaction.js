@@ -21,6 +21,7 @@ import AppPagination from "containers/PaginationComponent";
 import AlertDialog from "components/AlretDialog";
 import { Theme } from "theme";
 import "styles/Dialog.css";
+import ListLoading from "./ListLoading";
 
 const CustomizedTableContainer = styled(TableContainer)`
   color: #2ca58d;
@@ -79,7 +80,7 @@ const TransactionListResults = (props) => {
   const classes = useStyles();
   const [SelectedTransactionIds, setSelectedTransactionIds] = useState([]);
   const navigate = useNavigate();
-  const { results } = useSelector((state) => state.api);
+  const { results, loading } = useSelector((state) => state.api);
 
   React.useEffect(() => {
     setSelectedTransactionIds([]);
@@ -194,7 +195,7 @@ const TransactionListResults = (props) => {
                     </TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody selected classes={{ selected: classes.selected }}>
+                {!loading?<TableBody selected classes={{ selected: classes.selected }}>
                   {props.transactions
                     .slice(0, props.limit)
                     .map((transaction) => (
@@ -254,12 +255,12 @@ const TransactionListResults = (props) => {
                         </TableCell>
                         <TableCell>
                           <Typography variant="body1">
-                            {transaction.household_rent}
+                            {transaction.household_rent_field}
                           </Typography>{" "}
                         </TableCell>
                         <TableCell>
                           <Typography variant="body1">
-                            {transaction.last_rent}
+                            {transaction.last_rent_field}
                           </Typography>{" "}
                         </TableCell>
                         <TableCell>
@@ -289,7 +290,7 @@ const TransactionListResults = (props) => {
                         </TableCell>
                       </TableRow>
                     ))}
-                </TableBody>
+                </TableBody>:<ListLoading/> }
               </Table>
             </CustomizedTableContainer>
           </Grid>

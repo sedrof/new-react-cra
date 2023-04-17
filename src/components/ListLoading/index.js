@@ -15,5 +15,6 @@ export default function ListLoading() {
       <Skeleton style={{transform: 'translate(15%)'}} variant="rectangular" width='50vw' height='10vw' />
       <Skeleton style={{transform: 'translate(15%)'}} variant="rounded" width='50vw' height='10vw' />
     </Stack>
+    
   );
 }

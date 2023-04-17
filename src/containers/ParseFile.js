@@ -146,7 +146,7 @@ const ParseFile = (props) => {
                 )
                 .required("required"),
               family_member_date_of_birth:
-                Yup.date("date").required("required").max(new Date(), "Date of birth should be less than or equal to today's date"),
+                Yup.date("date").required("required"),
               family_member_income: Yup.number("must be a number"),
             })
           ).test(
@@ -177,7 +177,7 @@ const ParseFile = (props) => {
                   household.length !== 1
                 ) {
                   errMsg = householdMap[key][0].transaction_chp_reference;
-                  console.log("first");
+                  // console.log("first");
                   hasError = true;
                   break;
                 }
@@ -187,7 +187,7 @@ const ParseFile = (props) => {
                   relationships.every((r) => ["tenant", "others"].includes(r))
                 ) {
                   errMsg = householdMap[key][0].transaction_chp_reference;
-                  console.log("first");
+                  // console.log("first");
                   hasError = true;
                   break;
                 }
@@ -197,8 +197,8 @@ const ParseFile = (props) => {
                   relationships.every((r) => ["tenant", "partner"].includes(r))
                 ) {
                   errMsg = householdMap[key][0].transaction_chp_reference;
-                  console.log("Coule");
-                  console.log(errMsg, 'err msg');
+                  // console.log("Coule");
+                  // console.log(errMsg, 'err msg');
                   hasError = true;
                   break;
                 }
@@ -208,18 +208,18 @@ const ParseFile = (props) => {
                   (household.length > 3 || household.length < 2)
                 ) {
                   errMsg = householdMap[key][0].transaction_chp_reference;
-                  console.log("Single 1-2 kids");
+                  // console.log("Single 1-2 kids");
                   hasError = true;
                   break;
                 }
-                console.log(household.length, "household length");
+                // console.log(household.length, "household length");
                 if (
                   familyGroupFamilyTypeSet.has("single 3+ kids") &&
                   relationships.every((r) => singleKids.includes(r)) &&
                   household.length < 4
                 ) {
                   errMsg = householdMap[key][0].transaction_chp_reference;
-                  console.log("Single 1-2 kids");
+                  // console.log("Single 1-2 kids");
                   hasError = true;
                   break;
                 }
@@ -229,7 +229,7 @@ const ParseFile = (props) => {
                   household.length < 5
                 ) {
                   errMsg = householdMap[key][0].transaction_chp_reference;
-                  console.log("Couple 3+ kids");
+                  // console.log("Couple 3+ kids");
                   hasError = true;
                   break;
                 }
@@ -239,7 +239,7 @@ const ParseFile = (props) => {
                   (household.length > 4 || household.length < 3)
                 ) {
                   errMsg = householdMap[key][0].transaction_chp_reference;
-                  console.log("Couple 1-2 kids");
+                  // console.log("Couple 1-2 kids");
                   hasError = true;
                   break;
                 }

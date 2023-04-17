@@ -46,7 +46,7 @@ const MyButton = styled(Button)`
   }
 `;
 const StyledPaper = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  // backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(2),
   maxWidth: "90%",
@@ -142,8 +142,9 @@ export default function NewForm() {
     }, 1000);
     // setOpen(false);
   };
-  console.log(errors.familyGroup ? errors.familyGroup : "null", "dd");
+  console.log(errors.familyGroup? errors.familyGroup : "null");
   return (
+    <ThemeProvider theme={Theme}>
     <div>
       <Button
         type="button"
@@ -237,15 +238,25 @@ export default function NewForm() {
           New Transaction
         </DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ThemeProvider theme={Theme}>
-            {errors.familyGroup?.nestedArray && (
+         
+          {showSuccessMessage && (
+                  <Alert
+                    style={{ width: "60%" }}
+                    variant="filled"
+                    severity="success"
+                  >
+                    Transaction Added Successfully!
+                  </Alert>
+                )}
+            {errors.familyGroup && (
               <Alert
                 severity="error"
+                style={{backgroundColor: "#f6e3e9", color: "rgb(87, 41, 41)", width: "100%"}}
               >
                 {errors.familyGroup.map((msg) => (
                   <>
                     <AlertTitle>Error</AlertTitle>
-                    <div>{msg.nestedArray.message}</div>
+                    <div>{msg.nestedArray?.message}</div>
                   </>
                 ))}
               </Alert>
@@ -261,15 +272,7 @@ export default function NewForm() {
                   mt: "40px",
                 }}
               >
-                {showSuccessMessage && (
-                  <Alert
-                    style={{ width: "60%" }}
-                    variant="filled"
-                    severity="success"
-                  >
-                    Transaction Added Successfully!
-                  </Alert>
-                )}
+                
 
                 <Grid
                   item
@@ -343,7 +346,7 @@ export default function NewForm() {
                 </Grid>
               </StyledPaper>
             </Grid>
-          </ThemeProvider>
+         
           <StyledPaper
             sx={{
               my: 2,
@@ -367,5 +370,6 @@ export default function NewForm() {
         </form>
       </Dialog>
     </div>
+    </ThemeProvider>
   );
 }
