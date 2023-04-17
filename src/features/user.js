@@ -69,11 +69,11 @@ export const login = createAsyncThunk(
 				dispatch(getUser());
 				return data;
 			} else {
-				console.log('something went wrong')
+				// console.log('something went wrong')
 				return thunkAPI.rejectWithValue(data);
 			}
 		} catch (err) {
-			console.log('error')
+			// console.log('error')
 			return thunkAPI.rejectWithValue(err.response.data);
 		}
 	}

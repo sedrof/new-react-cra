@@ -77,7 +77,7 @@ export default function EditForm() {
 
   const dispatch = useDispatch();
   const { ids } = useParams();
-  console.log(errors , "errors");
+  // console.log(errors , "errors");
   React.useEffect(() => {
     const api = async (objID) => {
       const res = await dispatch(getSingleTransaction(ids))
@@ -86,7 +86,7 @@ export default function EditForm() {
           setTransaction(data["payload"]);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     };
     if (ids) {
@@ -106,10 +106,10 @@ export default function EditForm() {
   };
 
   const onSubmit = (data) => {
-    console.log(errors, "bzz");
+    // console.log(errors, "bzz");
     // const bod = JSON.stringify(data);
     dispatch(singleUpdateTransaction({ data, ids })).then((data) => {
-      console.log(data, "data from dispatch");
+      // console.log(data, "data from dispatch");
       setShowResponseMessage(data.payload);
       setShowSuccessMessage(data.payload === "success");
       setShowErrorMessage(data.payload === "Error");

@@ -29,7 +29,7 @@ export const getTransactions = createAsyncThunk(
 export const downloadCSV = createAsyncThunk(
   "api/downloadCSV",
   async (id, thunkAPI) => {
-    console.log(id)
+    // console.log(id)
     try {
       const authState = thunkAPI.getState().user; // get the auth state
       const access_token = authState.access; 
@@ -121,7 +121,7 @@ export const deleteTransactions = createAsyncThunk(
     console.log(body, 'dds')
     try {
       const access_key = Cookies.get('access_token')
-      console.log(access_key, 'dffvvv')
+      // console.log(access_key, 'dffvvv')
       const res = await axios.post(`${process.env.REACT_APP_END_URL}calc/delete/`,body, config(access_key))
       const data = res.data;
       if (res.status === 200) {
@@ -185,13 +185,13 @@ export const singleCreateTransaction = createAsyncThunk(
 export const singleUpdateTransaction = createAsyncThunk(
   'api/postData',
   async ({ data, ids }, thunkAPI) => {
-    console.log(ids, 'IDSS')
-    console.log(data, 'DATA')
+    // console.log(ids, 'IDSS')
+    // console.log(data, 'DATA')
     const body = JSON.stringify(data)
-    console.log(body, ' stringify body')
+    // console.log(body, ' stringify body')
     const access_key = Cookies.get('access_token')
     try {
-      console.log(' trying')
+      // console.log(' trying')
       const res = await axios.put(`${process.env.REACT_APP_END_URL}calc/update/${ids}/`,body, config(access_key))
       const data = res.data;
       if (res.status === 200) {
@@ -256,7 +256,7 @@ const transactionSlice = createSlice({
         state.loading = true;
       })
       .addCase(getTransactions.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.loading = false;
         state.count = action.payload["count"];
         state.results = action.payload["results"];
@@ -315,7 +315,7 @@ const transactionSlice = createSlice({
         state.downloadCSVs = items['url']
       })
       .addCase(downloadCSV.rejected, (state, action) => {
-        console.log(action.payload, 'payload')
+        // console.log(action.payload, 'payload')
         state.loading = false;
       })
       .addCase(downloadPDF.pending, (state) => {
@@ -359,7 +359,7 @@ const transactionSlice = createSlice({
       })
       .addCase(getSingleTransaction.fulfilled, (state, action) =>{
         state.loading = false
-        console.log(action.status, 'payload from cases')
+        // console.log(action.status, 'payload from cases')
         state.statuss = action.payload.status
       })
       .addCase(getSingleTransaction.rejected, (state) =>{

@@ -86,9 +86,9 @@ const validationSchema = Yup.object().shape({
     "familyGroup-length",
     "dsdsdsds",
     function (value) {
-      console.log(value, 'valueee')
+      // console.log(value, 'valueee')
       const fgNames = value.map(obj => obj.family_group_name);
-      console.log(fgNames, 'fgNames')
+      // console.log(fgNames, 'fgNames')
       const isUnique = new Set(fgNames).size === value.length;
       return isUnique ? true : this.createError({
         message: "family group names should be unique",

@@ -10,7 +10,7 @@ const AppPagination = (props) => {
     <div>
       <Pagination
         onChange={(event, val) => {
-          console.log(loading, 'val change')
+          // console.log(loading, 'val change')
           props.setPage(val);
           setTimeout(() => {
             window.scroll(1, 0);

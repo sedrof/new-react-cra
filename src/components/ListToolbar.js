@@ -31,7 +31,7 @@ const TransactionListToolbar = (props) => {
     </>
   );
   function updateList(list){
-    console.log('update list')
+    // console.log('update list')
   }
   return (
     // <ThemeProvider theme={Theme}>

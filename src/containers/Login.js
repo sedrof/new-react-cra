@@ -37,7 +37,7 @@ const Login = () => {
       const { email, password } = values;
       dispatch(login({email, password})).then((data) => {
         setShowErrorMessage(data['payload']['detail'])
-        console.log(data['payload']['detail'], 'data from dispatch')
+        // console.log(data['payload']['detail'], 'data from dispatch')
         if(data['payload']['detail'] === 'No active account found with the given credentials'){
           setShowSuccessMessage(true)
           setTimeout(() => {

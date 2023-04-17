@@ -188,9 +188,9 @@ export default function Profile() {
   if (!isAuthenticated) return <Navigate to="/" />;
   const onSubmit = (data) => {
     data["email"] = email;
-    console.log(data);
+    // console.log(data);
     dispatch(changePassword(data)).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res["type"] === "users/ChangePassword/fulfilled") {
         setShowSuccessMessage(true);
         setTimeout(() => {

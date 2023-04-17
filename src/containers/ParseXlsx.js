@@ -37,7 +37,7 @@ function ParseXlsx(name) {
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { raw: false });
       setTransaction(jsonData);
     };
-    console.log(transaction, "transaction")
+    // console.log(transaction, "transaction")
     reader.readAsArrayBuffer(file);
   };
 

@@ -142,7 +142,7 @@ export default function NewForm() {
     }, 1000);
     // setOpen(false);
   };
-  console.log(errors.familyGroup? errors.familyGroup : "null");
+  // console.log(errors.familyGroup? errors.familyGroup : "null");
   return (
     <ThemeProvider theme={Theme}>
     <div>
