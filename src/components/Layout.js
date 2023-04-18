@@ -16,16 +16,21 @@ const Layout = ({ title, content, children }) => {
         <meta name="description" content={content} />
       </Helmet>
       {loading && <LinearProgress color="success" />}
-      
+      {uploadStatus && (
+        <div className="card">
+          <div className="card-header">Uploading file</div>
+          <div className="card-body">
+            <div className="progress-bar"></div>
+          </div>
+        </div>
+      )}
       <div className="profile">
         <Navbar />
       </div>
       <div className="child1">
         <Sidebar />
       </div>
-      <div className="child">{uploadStatus && (
-       <Alert style={{ width:'60%'}} variant="filled" severity="success">File Uploaded successfully</Alert>
-      )}{children}</div>
+      <div className="child">{children}</div>
     </React.Fragment>
   );
 };

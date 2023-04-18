@@ -265,17 +265,9 @@ const ParseFile = (props) => {
                   // navigate("/");
                 }, 4000);
               } else {
-                setTimeout(() => {
-                  navigate("/");
-                  setShowResponseMessage("");
-                }, 4000);
               }
             })
-            .finally(() => {
-              setTimeout(() => {
-                dispatch(setUploadStatus(false));
-              }, 5000);
-            });
+            
 
           setSubmitting(false);
           // navigate("/");

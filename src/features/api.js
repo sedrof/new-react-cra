@@ -101,7 +101,7 @@ export const uploadTransactions = createAsyncThunk(
     try {
       const res = await axios.post(`${process.env.REACT_APP_END_URL}file/upload-csv/`,body, config(access_key))
       const data = res.data;
-      if (res.status === 201) {
+      if (res.status === 200) {
         return body;
       } else {
         return thunkAPI.rejectWithValue(data);
@@ -281,14 +281,16 @@ const transactionSlice = createSlice({
         state.statuss = action.payload;
       })
       .addCase(uploadTransactions.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(uploadTransactions.fulfilled, (state, action) => {
-        state.loading = false;
+        // state.loading = true;
         state.uploadStatus = true;
       })
+      .addCase(uploadTransactions.fulfilled, (state, action) => {
+        // state.loading = false;
+        state.uploadStatus = false;
+      })
       .addCase(uploadTransactions.rejected, (state) => {
-        state.loading = false;
+        // state.loading = false;
+        state.uploadStatus = false;
         // state.status = 'failed with error';
       })
       .addCase(deleteTransactions.pending, (state) => {
