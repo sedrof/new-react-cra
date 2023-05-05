@@ -1,16 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from 'axios';
-import { config } from 'utils/instances';
-import Cookies from 'js-cookie';
-
+import axios from "axios";
+import { config } from "utils/instances";
+import Cookies from "js-cookie";
 
 export const getTransactions = createAsyncThunk(
   "api/getTransactions",
   async ({ page, newSearch }, thunkAPI) => {
     try {
       const authState = thunkAPI.getState().user; // get the auth state
-      const access_token = authState.access; 
-      const res = await axios.get(`${process.env.REACT_APP_END_URL}calc/trans/?page=${page}&search=${newSearch}`, config(access_token))
+      const access_token = authState.access;
+      const res = await axios.get(
+        `${process.env.REACT_APP_END_URL}calc/trans`,
+        config(access_token)
+      );
       const data = await res.data;
       if (res.status === 200) {
         return data;
@@ -19,7 +21,7 @@ export const getTransactions = createAsyncThunk(
       }
     } catch (err) {
       if (!err.response) {
-        throw err
+        throw err;
       }
       return thunkAPI.rejectWithValue(err.response.data);
     }
@@ -32,19 +34,23 @@ export const downloadCSV = createAsyncThunk(
     // console.log(id)
     try {
       const authState = thunkAPI.getState().user; // get the auth state
-      const access_token = authState.access; 
-      const res = await axios.post(`${process.env.REACT_APP_END_URL}calc/csv/`, { uuid_list: id }, {
-        responseType: 'blob', // tell axios to expect a binary response
-        headers: {
-          'Authorization': `JWT ${access_token}` // set the Authorization header with the access token
+      const access_token = authState.access;
+      const res = await axios.post(
+        `${process.env.REACT_APP_END_URL}calc/csv/`,
+        { uuid_list: id },
+        {
+          responseType: "blob", // tell axios to expect a binary response
+          headers: {
+            Authorization: `JWT ${access_token}`, // set the Authorization header with the access token
+          },
         }
-      });
+      );
 
-      const blob = new Blob([res.data], { type: 'text/csv' });
+      const blob = new Blob([res.data], { type: "text/csv" });
       const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', 'transactions.csv');
+      link.setAttribute("download", "transactions.csv");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -62,22 +68,27 @@ export const downloadCSV = createAsyncThunk(
 
 export const downloadPDF = createAsyncThunk(
   "api/downloadPDF",
-  async ( id , thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
       const authState = thunkAPI.getState().user; // get the auth state
-      const access_token = authState.access; 
-      const res = await axios.post(`${process.env.REACT_APP_END_URL}calc/pdf/`, { uuid_list: id }, {
-        responseType: 'blob', // tell axios to expect a binary response
-        headers: {
-          'Authorization': `JWT ${access_token}` // set the Authorization header with the access token
+      const access_token = authState.access;
+      
+      const res = await axios.post(
+        `${process.env.REACT_APP_END_URL}calc/pdf/`,
+        { uuid_list: id },
+        {
+          responseType: "blob", // tell axios to expect a binary response
+          headers: {
+            Authorization: `JWT ${access_token}`, // set the Authorization header with the access token
+          },
         }
-      });
+      );
 
-      const blob = new Blob([res.data], { type: 'application/zip' });
+      const blob = new Blob([res.data], { type: "application/zip" });
       const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', 'transactions.zip');
+      link.setAttribute("download", "transactions.zip");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -92,14 +103,52 @@ export const downloadPDF = createAsyncThunk(
     }
   }
 );
+export const downloadSinglePDF = createAsyncThunk(
+  "api/downloadSinglePDF",
+  async (transaction_id, thunkAPI) => {
+    try {
+      const authState = thunkAPI.getState().user; // get the auth state
+      const access_token = authState.access;
+      //get the acceess_token from cookies
+      const acceess_token_1 = Cookies.get("access_token")
+      console.log(acceess_token_1, 'token')
+      const response = await axios.post(
+        `${process.env.REACT_APP_END_URL}calc/single/pdf/`,
+        { transaction_id: transaction_id },
+        {
+          responseType: "blob",
+          headers: {
+            Authorization: `JWT ${acceess_token_1}`,
+          },
+        }
+      );
+
+      // Create a URL object for the blob
+      // const blobUrl = URL.createObjectURL(response.data);
+      const blob = new Blob([response.data], { type: "application/pdf" });
+
+      // Save the URL to the Redux store
+      return blob;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const uploadTransactions = createAsyncThunk(
   "api/uploadTransactions",
   async (body, thunkAPI) => {
-    const access_key = Cookies.get('access_token')
+    const access_key = Cookies.get("access_token");
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_END_URL}file/upload-csv/`,body, config(access_key))
+      const res = await axios.post(
+        `${process.env.REACT_APP_END_URL}file/upload-csv/`,
+        body,
+        config(access_key)
+      );
       const data = res.data;
       if (res.status === 200) {
         return body;
@@ -108,7 +157,7 @@ export const uploadTransactions = createAsyncThunk(
       }
     } catch (err) {
       if (!err.response) {
-        throw err
+        throw err;
       }
       return thunkAPI.rejectWithValue(err.response.data);
     }
@@ -118,11 +167,15 @@ export const uploadTransactions = createAsyncThunk(
 export const deleteTransactions = createAsyncThunk(
   "api/deleteTransactions",
   async (body, thunkAPI) => {
-    console.log(body, 'dds')
+    console.log(body, "dds");
     try {
-      const access_key = Cookies.get('access_token')
+      const access_key = Cookies.get("access_token");
       // console.log(access_key, 'dffvvv')
-      const res = await axios.post(`${process.env.REACT_APP_END_URL}calc/delete/`,body, config(access_key))
+      const res = await axios.post(
+        `${process.env.REACT_APP_END_URL}calc/delete/`,
+        body,
+        config(access_key)
+      );
       const data = res.data;
       if (res.status === 200) {
         return body;
@@ -131,7 +184,7 @@ export const deleteTransactions = createAsyncThunk(
       }
     } catch (err) {
       if (!err.response) {
-        throw err
+        throw err;
       }
       return thunkAPI.rejectWithValue(err.response.data);
     }
@@ -141,10 +194,13 @@ export const deleteTransactions = createAsyncThunk(
 export const singleDeleteTransactions = createAsyncThunk(
   "api/singleDeleteTransactions",
   async (body, thunkAPI) => {
-    const access_key = Cookies.get('access_token')
+    const access_key = Cookies.get("access_token");
 
     try {
-      const res = await axios.delete(`${process.env.REACT_APP_END_URL}calc/trans/${body}`,config(access_key))
+      const res = await axios.delete(
+        `${process.env.REACT_APP_END_URL}calc/trans/${body}`,
+        config(access_key)
+      );
       const data = await res.data;
       if (res.status === 200) {
         return body;
@@ -153,7 +209,7 @@ export const singleDeleteTransactions = createAsyncThunk(
       }
     } catch (err) {
       if (!err.response) {
-        throw err
+        throw err;
       }
       return thunkAPI.rejectWithValue(err.response.data);
     }
@@ -163,10 +219,14 @@ export const singleDeleteTransactions = createAsyncThunk(
 export const singleCreateTransaction = createAsyncThunk(
   "api/singleCreateTransaction",
   async (body, thunkAPI) => {
-    const access_key = Cookies.get('access_token')
+    const access_key = Cookies.get("access_token");
     try {
-      const res = await axios.post(`${process.env.REACT_APP_END_URL}calc/create-single-transaction/`,body, config(access_key))
-       
+      const res = await axios.post(
+        `${process.env.REACT_APP_END_URL}calc/create-single-transaction/`,
+        body,
+        config(access_key)
+      );
+
       const data = res.data;
       if (res.status === 200) {
         return body;
@@ -175,7 +235,7 @@ export const singleCreateTransaction = createAsyncThunk(
       }
     } catch (err) {
       if (!err.response) {
-        throw err
+        throw err;
       }
       return thunkAPI.rejectWithValue(err.response.data);
     }
@@ -183,16 +243,20 @@ export const singleCreateTransaction = createAsyncThunk(
 );
 
 export const singleUpdateTransaction = createAsyncThunk(
-  'api/postData',
+  "api/postData",
   async ({ data, ids }, thunkAPI) => {
     // console.log(ids, 'IDSS')
     // console.log(data, 'DATA')
-    const body = JSON.stringify(data)
+    const body = JSON.stringify(data);
     // console.log(body, ' stringify body')
-    const access_key = Cookies.get('access_token')
+    const access_key = Cookies.get("access_token");
     try {
       // console.log(' trying')
-      const res = await axios.put(`${process.env.REACT_APP_END_URL}calc/update/${ids}/`,body, config(access_key))
+      const res = await axios.put(
+        `${process.env.REACT_APP_END_URL}calc/update/${ids}/`,
+        body,
+        config(access_key)
+      );
       const data = res.data;
       if (res.status === 200) {
         return data;
@@ -200,7 +264,7 @@ export const singleUpdateTransaction = createAsyncThunk(
         return thunkAPI.rejectWithValue(data);
       }
     } catch (err) {
-      console.log('errorrs')
+      console.log("errorrs");
       if (!err.response) {
         throw err;
       }
@@ -209,11 +273,14 @@ export const singleUpdateTransaction = createAsyncThunk(
   }
 );
 export const getSingleTransaction = createAsyncThunk(
-  'athync/getSingleData',
-  async ( ids , thunkAPI) => {
+  "athync/getSingleData",
+  async (ids, thunkAPI) => {
     try {
-      const access_key = Cookies.get('access_token')
-      const res = await axios.get(`${process.env.REACT_APP_END_URL}calc/transaction/${ids}`, config(access_key))
+      const access_key = Cookies.get("access_token");
+      const res = await axios.get(
+        `${process.env.REACT_APP_END_URL}calc/transaction/${ids}`,
+        config(access_key)
+      );
       const data = res.data;
       if (res.status === 200) {
         return data;
@@ -231,11 +298,12 @@ export const getSingleTransaction = createAsyncThunk(
 
 const initialState = {
   results: [],
-  count: null,
+  // count: null,
   loading: false,
   uploadStatus: false,
   downloadCSVs: null,
-  downloadPDFs: null
+  downloadPDFs: null,
+  downloadSinglePDFs:null,
 };
 
 const transactionSlice = createSlice({
@@ -258,13 +326,13 @@ const transactionSlice = createSlice({
       .addCase(getTransactions.fulfilled, (state, action) => {
         // console.log(action.payload);
         state.loading = false;
-        state.count = action.payload["count"];
-        state.results = action.payload["results"];
+        // state.count = action.payload["count"];
+        state.results = action.payload;
         // state.results.push(action.payload.data["results"])
       })
       .addCase(getTransactions.rejected, (state) => {
         state.loading = false;
-        state.count = null;
+        // state.count = null;
       })
       .addCase(singleDeleteTransactions.pending, (state) => {
         state.loading = true;
@@ -313,8 +381,8 @@ const transactionSlice = createSlice({
         state.loading = false;
         const items = action.payload;
         // localStorage.setItem('downloadUrl', items['url'])
-        console.log(action.payload)
-        state.downloadCSVs = items['url']
+        console.log(action.payload);
+        state.downloadCSVs = items["url"];
       })
       .addCase(downloadCSV.rejected, (state, action) => {
         // console.log(action.payload, 'payload')
@@ -326,9 +394,20 @@ const transactionSlice = createSlice({
       .addCase(downloadPDF.fulfilled, (state, action) => {
         state.loading = false;
         const items = action.payload;
-        state.downloadPDFs = items['url']
+        state.downloadPDFs = items["url"];
       })
       .addCase(downloadPDF.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(downloadSinglePDF.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(downloadSinglePDF.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log(action.payload, ' patload')
+        state.downloadSinglePDFs = action.payload;
+      })
+      .addCase(downloadSinglePDF.rejected, (state, action) => {
         state.loading = false;
       })
       .addCase(singleCreateTransaction.pending, (state) => {
@@ -356,16 +435,16 @@ const transactionSlice = createSlice({
       .addCase(singleUpdateTransaction.rejected, (state) => {
         state.loading = false;
       })
-      .addCase(getSingleTransaction.pending, (state) =>{
-        state.loading = true
+      .addCase(getSingleTransaction.pending, (state) => {
+        state.loading = true;
       })
-      .addCase(getSingleTransaction.fulfilled, (state, action) =>{
-        state.loading = false
+      .addCase(getSingleTransaction.fulfilled, (state, action) => {
+        state.loading = false;
         // console.log(action.status, 'payload from cases')
-        state.statuss = action.payload.status
+        state.statuss = action.payload.status;
       })
-      .addCase(getSingleTransaction.rejected, (state) =>{
-        state.loading = true
+      .addCase(getSingleTransaction.rejected, (state) => {
+        state.loading = true;
       });
   },
 });

@@ -122,7 +122,7 @@ const TransactionListToolbar = (props) => {
                 onChange={(newValue) => props.setSearch(newValue)}
                 onCancelSearch={() => props.setSearch("")}
               />
-              {len_of_trans > 0 && selected_list}
+              
             </Grid>
           </Grid>
         </Box>

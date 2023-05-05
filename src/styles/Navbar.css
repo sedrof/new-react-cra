@@ -29,7 +29,7 @@
 }
 
 .card {
-    position: absolute;
+    position: fixed;
     top:16px;
     right: 16px;
     z-index: 1;
@@ -39,7 +39,7 @@
     border-radius: 4px;
     max-width: 400px;
     padding: 16px;
-    margin-top: 16px;
+    margin-top: 50px;
     font-family: 'GT Walsheim', sans-serif;
     transition: transform 0.2s ease-in-out;
   }
@@ -52,6 +52,7 @@
     /* font-weight: bold; */
     font-size: 10px;
     margin-bottom: 16px;
+    color: #2ca58d;
   }
   
   .card-body {
@@ -78,4 +79,29 @@
       width: 100%;
     }
   }
+
+  /* .pdfViewer {
+    width: 50%;
+    margin-left: 25%;
+  } */
+
+  @media only screen and (max-width: 768px) {
+    .pdfViewer {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
   
+  @media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .pdfViewer {
+      width: 80%;
+      margin-left: 15%;
+    }
+  }
+  
+  @media only screen and (min-width: 1025px) {
+    .pdfViewer {
+      width: 50%;
+      margin-left: 25%;
+    }
+  }

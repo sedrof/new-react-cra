@@ -77,7 +77,7 @@ export const FormInputText = ({
             shrink: true,
             style: {
               fontFamily: "GT Walsheim",
-              fontSize: "12px",
+              // fontSize: "12px",
             },
           }}
           // helperText={error ? error.message : null}

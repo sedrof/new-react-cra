@@ -15,7 +15,8 @@ export const FormInputDropdown = ({
   control,
   label,
   options,
-  defaultValues
+  defaultValues,
+  labelStyle
 }) => {
   const generateSingleOptions = () => {
     return options.map((option) => {
@@ -31,7 +32,7 @@ export const FormInputDropdown = ({
     formControl: {
       '& .MuiSelect-selectMenu': {
         fontFamily: 'GT Walsheim',
-        fontSize: '10px',
+        // fontSize: '10px',
         whiteSpace: 'break-spaces',
       },
       transform: "translateY(-5px)",
@@ -44,10 +45,11 @@ export const FormInputDropdown = ({
 
   return (
     <FormControl className={`${classes.formControl} MuiFormControl-root`}>
-      <InputLabel shrink ref={inputLabel}>
+      <InputLabel shrink ref={inputLabel}
+       style={labelStyle}>
         <Typography
           style={{
-            fontSize: "10px",
+            fontSize: "15px",
           }}
         >
           {label}

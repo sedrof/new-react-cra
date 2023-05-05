@@ -85,7 +85,7 @@ const FileDownloads = (props) => {
       <Grid item>
         <Tooltip title="Delete Selected Items" placement="top-start">
           <MyButton
-            disabled={loading || ids?.length === 0 || ids?.length > 20}
+            disabled={loading || ids?.length === 0}
             onClick={() => {
               handleDelete(props.ids);
             }}

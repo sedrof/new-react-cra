@@ -117,7 +117,7 @@ export default function Fields({
                         control={control}
                         name={`familyGroup.${index}.family_group_cra_eligi`}
                         label="
-                      CRA Eligibilty"
+                      CRA Eligib"
                         options={Yes_No}
                         defaultValues="Yes"
                       />
@@ -137,7 +137,7 @@ export default function Fields({
                       <FormInputText
                         control={control}
                         name={`familyGroup.${index}.family_group_cra_amount`}
-                        label="CRA Amount"
+                        label="CRA Amt"
                       />
                     </Grid>
 
@@ -159,7 +159,7 @@ export default function Fields({
                       <FormInputText
                         control={control}
                         name={`familyGroup.${index}.family_group_maint_amount`}
-                        label="Maint Amount"
+                        label="Maint Amt"
                       />
                     </Grid>
                     <Grid item md={2}>

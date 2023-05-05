@@ -8,7 +8,6 @@ import TransactionListToolbar from "components/ListToolbar";
 import { getTransactions } from "features/api";
 import Layout from "components/Layout";
 import TransactionListResults from "components/ListTransaction";
-import ListLoading from "components/ListLoading";
 
 const TransactionsListPage = (props) => {
   const [page, setPage] = useState(1);
@@ -16,7 +15,7 @@ const TransactionsListPage = (props) => {
   const [counts, setCount] = React.useState();
   const [ids, setIds] = React.useState([]);
   const [search, setSearch] = React.useState("");
-  const [newSearch] = useDebounce(search, 1000);
+  const [newSearch] = useDebounce(search, 100);
   const { isAuthenticated } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -27,12 +26,22 @@ const TransactionsListPage = (props) => {
 
   React.useEffect(() => {
     dispatch(getTransactions({ page, newSearch }));
-  }, [page, newSearch, results?.length]);
+  }, [results?.length]);
 
   React.useEffect(() => {
-    setTransactions(results);
-    setCount(count);
-  }, [count, results, loading, transactions?.length]);
+    if (newSearch) {
+      const filteredResults = results.filter(
+        (transaction) =>
+          transaction.chp_reference &&
+          transaction.chp_reference
+            .toLowerCase()
+            .includes(newSearch.toLowerCase())
+      );
+      setTransactions(filteredResults);
+    } else {
+      setTransactions(results);
+    }
+  }, [ results, loading, transactions?.length, newSearch]);
 
   if (!isAuthenticated) return <Navigate to="/login" />;
   return (

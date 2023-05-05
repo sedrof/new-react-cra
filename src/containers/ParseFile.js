@@ -24,6 +24,7 @@ const ParseFile = (props) => {
   const navigate = useNavigate();
   const [showResponseMessage, setShowResponseMessage] = React.useState("");
   const [isFailResponse, setIsFailResponse] = React.useState(false);
+  const [isSuccessResponse, setIsSuccessResponse] = React.useState(false);
 
   const handleChildChange = (newValue) => {
     setOpenz(newValue);
@@ -256,6 +257,7 @@ const ParseFile = (props) => {
           const body = JSON.stringify(values["files"]);
           dispatch(uploadTransactions(body))
             .then((data) => {
+              console.log(data["type"], 'data sent')
               setShowResponseMessage(data["type"]);
               if (data["type"] === "api/uploadTransactions/rejected") {
                 setIsFailResponse(true);
@@ -265,6 +267,14 @@ const ParseFile = (props) => {
                   // navigate("/");
                 }, 4000);
               } else {
+                console.log('elseeeee')
+                setIsSuccessResponse(true);
+                setTimeout(() => {
+                  setIsSuccessResponse(false);
+                  // navigate("/");
+                }
+                , 4000);
+
               }
             })
             
@@ -277,6 +287,9 @@ const ParseFile = (props) => {
           <>
             {isFailResponse && (
               <div style={{ color: "red" }}>{showResponseMessage}</div>
+            )}
+            {isFailResponse && (
+              <div style={{ color: "green" }}>{showResponseMessage}</div>
             )}
             <ErrorAlert errors={errors} />
 

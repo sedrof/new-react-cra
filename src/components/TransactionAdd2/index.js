@@ -237,17 +237,15 @@ export default function NewForm() {
         >
           New Transaction
         </DialogTitle>
+        {showSuccessMessage && (
+                <div className="card">
+                  <div className="card-header">Submit success</div>
+                  <div className="card-body">
+                    <div className="progress-bar"></div>
+                  </div>
+                </div>
+          )}
         <form onSubmit={handleSubmit(onSubmit)}>
-         
-          {showSuccessMessage && (
-                  <Alert
-                    style={{ width: "60%" }}
-                    variant="filled"
-                    severity="success"
-                  >
-                    Transaction Added Successfully!
-                  </Alert>
-                )}
             {errors.familyGroup && (
               <Alert
                 severity="error"

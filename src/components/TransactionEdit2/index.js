@@ -26,11 +26,12 @@ import Fields from "components/FieldArray";
 import { FormInputText } from "components/TextFieldInput";
 import { FormInputDate } from "components/DateFieldInput";
 import { FormInputDropdown } from "components/SelectFieldInput";
-import { getSingleTransaction, singleUpdateTransaction } from "features/api";
+import { getSingleTransaction, singleUpdateTransaction, downloadSinglePDF } from "features/api";
 import { incomeOptions } from "Data/IncomePeriodSelect";
 import validationSchema from "components/ValidationSchema";
 import { Theme } from "theme";
 import EditLoading from "components/TransactionEditLoading";
+import PDFViewer from "components/PdfViewer";
 
 const MyButton = styled(Button)`
   &&& {
@@ -69,9 +70,11 @@ export default function EditForm() {
     resolver: yupResolver(validationSchema),
   });
   const [transaction, setTransaction] = React.useState();
+  const [pdfUrl, setPdfUrl] = React.useState('');
   const [showSuccessMessage, setShowSuccessMessage] = React.useState(false);
   const [showErrorMessage, setShowErrorMessage] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [success, setSuccess] = React.useState(false);
   const [showResponseMessage, setShowResponseMessage] = React.useState("");
   const navigate = useNavigate();
 
@@ -79,24 +82,28 @@ export default function EditForm() {
   const { ids } = useParams();
   // console.log(errors , "errors");
   React.useEffect(() => {
-    const api = async (objID) => {
-      const res = await dispatch(getSingleTransaction(ids))
-        .then((data) => {
-          reset(data["payload"]);
-          setTransaction(data["payload"]);
-        })
-        .catch((error) => {
-          // console.log(error);
-        });
-    };
-    if (ids) {
-      api(ids);
-      setIsLoading(false);
-    }
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [transactionData, pdfData] = await Promise.all([
+          dispatch(getSingleTransaction(ids)),
+          dispatch(downloadSinglePDF(ids))
+        ]);
   
+        reset(transactionData.payload);
+        setTransaction(transactionData.payload);
+        setPdfUrl(URL.createObjectURL(pdfData.payload));
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        // handle the error here
+      }
+    };
+  
+    if (ids) {
+      fetchData();
+    }
+  }, [ids, dispatch]);
 
-  const [open, setOpen] = React.useState(true);
 
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -105,21 +112,26 @@ export default function EditForm() {
     navigate("/list");
   };
 
-  const onSubmit = (data) => {
-    // console.log(errors, "bzz");
-    // const bod = JSON.stringify(data);
-    dispatch(singleUpdateTransaction({ data, ids })).then((data) => {
-      // console.log(data, "data from dispatch");
-      setShowResponseMessage(data.payload);
-      setShowSuccessMessage(data.payload === "success");
-      setShowErrorMessage(data.payload === "Error");
-      setTimeout(() => {
-        setShowResponseMessage(null);
-        setShowSuccessMessage(false);
-        setShowErrorMessage(false);
-      }, 6000);
-    });
-    // setOpen(false);
+  const onSubmit = async (data) => {
+    try {
+      const response = await dispatch(singleUpdateTransaction({ data, ids }));
+      setShowResponseMessage(response.payload);
+      setShowSuccessMessage(response.payload === "success");
+      setShowErrorMessage(response.payload === "Error");
+  
+      // Update the PDF URL
+      const pdfResponse = await dispatch(downloadSinglePDF(ids));
+      setPdfUrl(URL.createObjectURL(pdfResponse.payload));
+    } catch (error) {
+      console.log(error);
+      // handle the error here
+    }
+  
+    setTimeout(() => {
+      setShowResponseMessage(null);
+      setShowSuccessMessage(false);
+      setShowErrorMessage(false);
+    }, 6000);
   };
 
   return (
@@ -189,10 +201,13 @@ export default function EditForm() {
             New Transaction
           </DialogTitle>
           {showSuccessMessage && (
-                  <div style={{ color: "green", textAlign:'center' }}>
-                    {showResponseMessage}
+                <div className="card">
+                  <div className="card-header">Submit success</div>
+                  <div className="card-body">
+                    <div className="progress-bar"></div>
                   </div>
-                )}
+                </div>
+          )}
                 {showErrorMessage && (
                   <div style={{color:'red'}}>{showResponseMessage}</div>
                 )}
@@ -268,6 +283,7 @@ export default function EditForm() {
                       options={incomeOptions}
                       label="Income Period"
                       defaultValues="Weekly"
+                      labelStyle={{ fontSize: "23px" }}
                     />
                   </Grid>
                   <Grid xs={4} md={2} item className="rent_effective_date">
@@ -307,6 +323,13 @@ export default function EditForm() {
                 }}
               />
             </StyledPaper>
+            <div className="pdfViewer" >
+            {pdfUrl &&
+             <iframe src={pdfUrl} width="100%" height="600px" title="PDF Document"></iframe>
+             
+             }
+            </div>
+            
           </form>
         </Dialog>
       </ThemeProvider> : <EditLoading/>}
