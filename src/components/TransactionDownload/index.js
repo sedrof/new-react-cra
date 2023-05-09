@@ -28,7 +28,7 @@ const FileDownloads = (props) => {
   const [randomNumber, setRandom] = React.useState("1");
   const [ids, setIds] = React.useState([]);
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.api);
+  const { loading, downloadPDFs } = useSelector((state) => state.api);
 
   React.useEffect(() => {
     setIds(props.ids);
@@ -60,7 +60,7 @@ const FileDownloads = (props) => {
       <Grid item>
         <Tooltip title="Download Selected Items as PDF" placement="top-start">
           <MyButton
-            disabled={loading || ids?.length === 0}
+            disabled={downloadPDFs || ids?.length === 0}
             onClick={() => {
               handlePDFDownload(props.ids);
             }}
@@ -73,7 +73,7 @@ const FileDownloads = (props) => {
       <Grid item>
         <Tooltip title="Download Selected Items as CSV" placement="top-start">
           <MyButton
-            disabled={loading || ids.length === 0}
+            disabled={downloadPDFs || ids.length === 0}
             onClick={() => {
               handleCSVDownload(props.ids);
             }}
@@ -85,7 +85,7 @@ const FileDownloads = (props) => {
       <Grid item>
         <Tooltip title="Delete Selected Items" placement="top-start">
           <MyButton
-            disabled={loading || ids?.length === 0}
+            disabled={loading || downloadPDFs|| ids?.length === 0}
             onClick={() => {
               handleDelete(props.ids);
             }}

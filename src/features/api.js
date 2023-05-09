@@ -302,7 +302,7 @@ const initialState = {
   loading: false,
   uploadStatus: false,
   downloadCSVs: null,
-  downloadPDFs: null,
+  downloadPDFs: false,
   downloadSinglePDFs:null,
 };
 
@@ -375,21 +375,19 @@ const transactionSlice = createSlice({
         state.statuss = action.payload;
       })
       .addCase(downloadCSV.pending, (state) => {
-        state.loading = true;
+        state.downloadPDFs = true;
       })
       .addCase(downloadCSV.fulfilled, (state, action) => {
-        state.loading = false;
+        state.downloadPDFs = false;
         const items = action.payload;
-        // localStorage.setItem('downloadUrl', items['url'])
-        console.log(action.payload);
         state.downloadCSVs = items["url"];
       })
       .addCase(downloadCSV.rejected, (state, action) => {
         // console.log(action.payload, 'payload')
-        state.loading = false;
+        state.downloadPDFs = false;
       })
       .addCase(downloadPDF.pending, (state) => {
-        state.loading = true;
+        state.downloadPDFs = true;
       })
       .addCase(downloadPDF.fulfilled, (state, action) => {
         state.loading = false;
@@ -397,7 +395,7 @@ const transactionSlice = createSlice({
         state.downloadPDFs = items["url"];
       })
       .addCase(downloadPDF.rejected, (state, action) => {
-        state.loading = false;
+        state.downloadPDFs = false;
       })
       .addCase(downloadSinglePDF.pending, (state) => {
         state.loading = true;

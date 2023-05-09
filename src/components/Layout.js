@@ -7,7 +7,7 @@ import "styles/Navbar.css";
 import Navbar from "./navbar";
 
 const Layout = ({ title, content, children }) => {
-  const { loading, uploadStatus } = useSelector((state) => state.api);
+  const { loading, uploadStatus, downloadPDFs } = useSelector((state) => state.api);
   const dispatch = useDispatch();
   return (
     <React.Fragment>
@@ -16,9 +16,9 @@ const Layout = ({ title, content, children }) => {
         <meta name="description" content={content} />
       </Helmet>
       {loading && <LinearProgress color="success" />}
-      {uploadStatus && (
+      {(uploadStatus || downloadPDFs) && (
         <div className="card">
-          <div className="card-header">Uploading file</div>
+          <div className="card-header">{uploadStatus?'Uploading file': 'downloading file'}</div>
           <div className="card-body">
             <div className="progress-bar"></div>
           </div>

@@ -21,7 +21,6 @@ import {
   IconButton,
 } from "@mui/material";
 import DeselectIcon from '@mui/icons-material/Deselect';
-import FilterListIcon from "@mui/icons-material/FilterList";
 import { ThemeProvider } from "@mui/styles";
 import AlertDialog from "components/AlretDialog";
 import { Theme } from "theme";
@@ -102,14 +101,13 @@ const TransactionListResults = (props) => {
   const navigate = useNavigate();
   const { results, loading } = useSelector((state) => state.api);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   
   
   const selectedTransactionIdsRef = useRef([]);
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    console.log(parseInt(event.target.value,10))
     setPage(0);
   };
 
@@ -344,7 +342,7 @@ function updateListOfIds(newCount) {
               </Table>
             </TableContainer>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPageOptions={[25, 50, 100]}
               component="div"
               count={props.transactions.length}
               rowsPerPage={rowsPerPage}
@@ -352,6 +350,16 @@ function updateListOfIds(newCount) {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               SelectProps={{ native: true }}
+              sx={{
+                "& .MuiTablePagination-root": {
+                  backgroundColor: "lightblue", // change the row background color here
+                  color:'red'
+                },
+                "& .MuiInputBase-root": {
+                  color: "#2ca58d", // change the input field font color here
+                  marginBottom:'10px'
+                },
+              }}
             />
           </Grid>
         </Grid>
