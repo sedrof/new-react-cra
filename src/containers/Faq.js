@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import { NavLink, Navigate } from "react-router-dom";
 import Layout from "components/Layout";
 import ReactPlayer from "react-player";
-import { Paper, Breadcrumbs, Typography } from "@mui/material";
-import "../styles/faq.css";
+import { Breadcrumbs, Typography } from "@mui/material";
+import "styles/faq.css";
 import "styles/breadcrumb.css";
 
 function VideoPlayer() {

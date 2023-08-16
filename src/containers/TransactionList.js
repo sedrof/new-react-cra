@@ -41,13 +41,18 @@ const TransactionsListPage = (props) => {
     } else {
       setTransactions(results);
     }
-  }, [ results, loading, transactions?.length, newSearch]);
+  }, [results, loading, transactions?.length, newSearch]);
 
   if (!isAuthenticated) return <Navigate to="/login" />;
   return (
     <Layout>
-      <div role="presentation">
-      <Breadcrumbs aria-label="breadcrumb">
+      <div
+        style={{
+          marginLeft: "60px",
+        }}
+        role="presentation"
+      >
+        <Breadcrumbs aria-label="breadcrumb">
           <NavLink className="nav-link-faq" to="/">
             Home
           </NavLink>
@@ -62,23 +67,13 @@ const TransactionsListPage = (props) => {
           // mt: "100px",
         }}
       >
-        {/* <Container maxWidth={false}> */}
         <TransactionListToolbar
           setSearch={setSearch}
           newSearch={newSearch}
           ids={ids}
-          // setRandomDelete={setRandomDelete}
         />
         <Box sx={{ mt: 3 }}>
           {
-          // loading ? (
-          //   <ListLoading 
-          //   setPage={setPage}
-          //     page={page}
-          //     counts={counts}/>
-              
-          // ) :
-           (
             <TransactionListResults
               updateIds={updateIds}
               loading={loading}
@@ -87,9 +82,8 @@ const TransactionsListPage = (props) => {
               page={page}
               counts={counts}
             />
-          )}
+          }
         </Box>
-        {/* </Container> */}
       </Box>
     </Layout>
   );

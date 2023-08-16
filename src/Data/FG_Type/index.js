@@ -28,8 +28,8 @@ const FG_Types = [
     value: "Single Sharer",
   },
   {
-    label: "One of a couple sep. due to illness, no dep.Children",
-    value: "One of a couple sep. due to illness, no dep.Children",
+    label: "One of a couple sep. due to illness, no depmainren",
+    value: "One of a couple sep. due to illness, no depmainren",
   },
 ];
 export default FG_Types;

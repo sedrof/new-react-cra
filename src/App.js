@@ -11,6 +11,9 @@ import TransactionsListPage from "containers/TransactionList";
 import EditForm from "components/TransactionEdit2";
 import Faq from "containers/Faq";
 import Profile from "containers/Profile";
+import ContactsIndex from "containers/ContactsIndex";
+import ContactDetail from "components/ContactDetail/index.js";
+
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -28,8 +31,10 @@ const App = (props) => {
         <Route path="/Login" element={<Login />} />
         <Route path="/UploadFile" element={<ParseFile />} />
         <Route path="/update/:ids/*" element={<EditForm />} />
+        <Route path="/edit/contact/:ids/*" element={<ContactDetail />} />
         <Route path="/list" element={<TransactionsListPage />} />
         <Route path="/FAQ" element={<Faq />} />
+        <Route path="/contacts" element={<ContactsIndex />} />
         <Route path="/Profile" element={<Profile />} />
       </Routes>
     </Router>

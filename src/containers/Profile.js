@@ -31,7 +31,6 @@ export default function Profile() {
   const handleLinkClick = (link) => {
     setActiveLink(link);
   };
-  // create useeffect to reset active link on page load
   React.useEffect(() => {
     setActiveLink("link1");
   }, []);

@@ -38,6 +38,12 @@ const TransactionListToolbar = (props) => {
             margin: {
               xs: "10px",
             },
+            width:{
+              xs:'100%',
+              md:'100%',
+              lg:'130%',
+              xl:'150%'
+            },
             transform: {
               xs: "translate(-20%)",
             },
@@ -57,9 +63,18 @@ const TransactionListToolbar = (props) => {
               variant="middle"
             >
               <Typography
-                style={{
+                sx={{
                   fontFamily: "GT Walsheim",
-                  fontWeight: "400",
+                  fontSize:{
+                    xs:'.7rem',
+                    md:'.7rem',
+                    lg:'.9rem',
+                    xl:'1rem'
+                  
+                  },
+                  fontWeight:{
+                    xs:"200",
+                  } 
                 }}
               >
                 Select from list below to execute
@@ -68,7 +83,6 @@ const TransactionListToolbar = (props) => {
           </Grid>
           <Grid
             item
-            xs={4}
             sx={{
               transform: "translateY(-10px)",
             }}
@@ -80,18 +94,25 @@ const TransactionListToolbar = (props) => {
       <Box>
         <Grid
           sx={{
+            width:{
+              xs:'80%',
+              md:'100%',
+              lg:'130%',
+              xl:'150%'
+            },
             transform: {
-              xs: "translate(-30%, 15%)",
+              xs: "translate( 15%)",
               md: "translateX(17%)",
               lg: "translateX(17%)",
-              xl: "translateX(45%)",
+              xl: "translateX(20%)",
             },
           }}
           container
           spacing={6}
           direction="row"
         >
-          <Grid item xs="12" md="10">
+          <Grid item
+           xs={12} md={10} lg={10} xl={10}>
             <SearchBar
               style={{
                 backgroundColor: "white",
@@ -104,7 +125,6 @@ const TransactionListToolbar = (props) => {
         </Grid>
       </Box>
     </Box>
-    // </ThemeProvider>
   );
 };
 

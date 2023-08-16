@@ -1,57 +1,29 @@
 
 
-#sidebar{
-    border-right: 0.01px solid #d2e0ce;
-    width: 22%;
-    min-width: 22%;
-    background-color: #ffff;
-}
 
-.child1 {
+.side-bar-parent {
     display: inline-block;
-    float:left;
-    min-width: 5%;
-    position: relative;
-    margin-top: 0;
-    height: 100%;
+    height: 100vw;
+    min-height: 100vw;
+    width: 15%;
+    min-width: 15%;
+    border-right: 0.01px solid #d2e0ce;
+    background-color: #ffff;
+
+
 }
-.child {
+.main {
     display: inline-block;
     float: right;
-    width: 77%;
+    width: 84%;
     /* height: 100vw; */
-    min-width: 75%
+    min-width: 84%
 }
 
-.nav-link {
-    transform: translate(-20px, -50% );
-    /* padding: 10px; */
-    padding-right: 10px;
-    margin: 40px;
-    
-    cursor: pointer;
-    font-family: 'GT Walsheim';
-    display: flex;
-    justify-content: space-between;
-    max-width: 150px;
-    text-align: left;
-    align-items:center;
-    /* margin-top: 70px; */
-}
-.nav-links {
-    transform: translate(-20px, -50% );
-    color: black;
-    padding-right: 10px;
-    margin: 40px;
-    cursor: pointer;
-    font-family: 'GT Walsheim', sans-serif;
-    display: flex;
-    justify-content: space-between;
-    max-width: 150px;
-    text-align: left;
-    align-items:center;
+
+.nav-link{
     text-decoration: none;
-    /* margin-top: 70px; */
+    color: #0d0d0d
 }
 
 .nav-link:hover{
@@ -77,6 +49,10 @@ h2{
     align-items: center;
 
 }
+.small-logo {
+    width: 150px; /* Adjust the width as per your requirements */
+    height: auto; /* Preserve the aspect ratio */
+  }
 @media only screen and (max-width: 1075px) {
     .small-logo {
       width: 100px;

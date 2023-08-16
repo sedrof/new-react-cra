@@ -349,37 +349,22 @@ const ParseFile = (props) => {
                 </div>
                 <div style={{ flex: 1, textAlign: "right" }}></div>
                 <button
-                  disabled={
-                    !isValid ||
-                    isSubmitting ||
-                    values["files"].length === 0 ||
-                    loading ||
-                    isFailResponse
-                  }
+                  disabled={!isValid || isSubmitting || values["files"].length === 0 || loading || isFailResponse}
                   type="submit"
                   style={{
-                    backgroundColor: `${
-                      isValid || values["files"].length > 0 ? "#2ca58d" : "grey"
-                    }`,
-                    // backgroundColor: "#3f51b5",
+                    backgroundColor: values["files"].length > 0 ? "#2ca58d" : "grey",
                     color: "white",
                     borderRadius: "4px",
                     padding: "8px 16px",
                     marginTop: "16px",
                     border: "none",
                     fontSize: "18px",
+                    fontFamily: "GT Walsheim",
+                    fontWeight: "900",
+                    fontStyle: "normal",
                   }}
                 >
-                  <Typography
-                    style={{
-                      fontFamily: "GT Walsheim",
-                      fontWeight: "900",
-                      fontStyle: "normal",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    Submit
-                  </Typography>
+                  Submit
                 </button>
               </div>
             </Form>

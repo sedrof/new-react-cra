@@ -24,7 +24,6 @@ import DeselectIcon from '@mui/icons-material/Deselect';
 import { ThemeProvider } from "@mui/styles";
 import AlertDialog from "components/AlretDialog";
 import { Theme } from "theme";
-import "styles/Dialog.css";
 import ListLoading from "./ListLoading";
 
 
@@ -99,7 +98,7 @@ function EnhancedTableToolbar
 const TransactionListResults = (props) => {
   const [SelectedTransactionIds, setSelectedTransactionIds] = useState([]);
   const navigate = useNavigate();
-  const { results, loading } = useSelector((state) => state.api);
+  const { loading } = useSelector((state) => state.api);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   

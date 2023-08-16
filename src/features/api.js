@@ -28,6 +28,31 @@ export const getTransactions = createAsyncThunk(
   }
 );
 
+export const getFamilyMembers = createAsyncThunk(
+  "api/getFamilyMembers",
+  async ({ page, newSearch }, thunkAPI) => {
+    try {
+      const authState = thunkAPI.getState().user; // get the auth state
+      const access_token = authState.access;
+      const res = await axios.get(
+        `${process.env.REACT_APP_END_URL}calc/family-members`,
+        config(access_token)
+      );
+      const data = await res.data;
+      if (res.status === 200) {
+        return data;
+      } else {
+        return thunkAPI.rejectWithValue(data);
+      }
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
 export const downloadCSV = createAsyncThunk(
   "api/downloadCSV",
   async (id, thunkAPI) => {
@@ -276,6 +301,7 @@ export const getSingleTransaction = createAsyncThunk(
   "athync/getSingleData",
   async (ids, thunkAPI) => {
     try {
+      
       const access_key = Cookies.get("access_token");
       const res = await axios.get(
         `${process.env.REACT_APP_END_URL}calc/transaction/${ids}`,
@@ -296,8 +322,35 @@ export const getSingleTransaction = createAsyncThunk(
   }
 );
 
+export const getSingleFamilymemberTransaction = createAsyncThunk(
+  "api/getSingleFamilymemberTransaction",
+  async (ids, thunkAPI) => {
+    console.log(ids, 'from redux')
+    try {
+      const access_key = Cookies.get("access_token");
+      const res = await axios.get(
+        `${process.env.REACT_APP_END_URL}calc/fm/transaction/${ids}`,
+        config(access_key)
+      );
+      const data = res.data;
+      if (res.status === 200) {
+        return data;
+      } else {
+        return thunkAPI.rejectWithValue(data);
+      }
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
 const initialState = {
   results: [],
+  family_members: [],
+  transaction_fm: [],
   // count: null,
   loading: false,
   uploadStatus: false,
@@ -331,6 +384,31 @@ const transactionSlice = createSlice({
         // state.results.push(action.payload.data["results"])
       })
       .addCase(getTransactions.rejected, (state) => {
+        state.loading = false;
+        // state.count = null;
+      })
+      .addCase(getSingleFamilymemberTransaction.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getSingleFamilymemberTransaction.fulfilled, (state, action) => {
+        // console.log(action.payload);
+        state.loading = false;
+        // state.count = action.payload["count"];
+        state.transaction_fm = action.payload;
+        // state.results.push(action.payload.data["results"])
+      })
+      .addCase(getSingleFamilymemberTransaction.rejected, (state) => {
+        state.loading = false;
+        // state.count = null;
+      })
+      .addCase(getFamilyMembers.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getFamilyMembers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.family_members = action.payload;
+      })
+      .addCase(getFamilyMembers.rejected, (state) => {
         state.loading = false;
         // state.count = null;
       })

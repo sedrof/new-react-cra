@@ -17,6 +17,7 @@
     flex-basis: auto;
     right: -51;
     transform: translateX(80vw);
+    z-index:1
 }
 
 .nav-link-profile{

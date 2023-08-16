@@ -6,6 +6,7 @@ import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { deleteTransactions, downloadCSV, downloadPDF } from "features/api";
+import useScreenSize from "components/ScreenSize";
 
 const MyButton = styled(Button)`
   &&& {
@@ -29,7 +30,9 @@ const FileDownloads = (props) => {
   const [ids, setIds] = React.useState([]);
   const dispatch = useDispatch();
   const { loading, downloadPDFs } = useSelector((state) => state.api);
+  const screenSize = useScreenSize();
 
+  console.log(screenSize.width)
   React.useEffect(() => {
     setIds(props.ids);
   }, [props.ids]);
@@ -65,7 +68,7 @@ const FileDownloads = (props) => {
               handlePDFDownload(props.ids);
             }}
           >
-            <FontAwesomeIcon size='2x' icon={ faFilePdf }/>
+            <FontAwesomeIcon size={screenSize.width > 1000?'3x':'2x'} icon={ faFilePdf }/>
           </MyButton>
         </Tooltip>
       </Grid>
@@ -78,7 +81,7 @@ const FileDownloads = (props) => {
               handleCSVDownload(props.ids);
             }}
           >
-            <FontAwesomeIcon size='2x' icon={ faFileCsv }/>
+            <FontAwesomeIcon size={screenSize.width > 1000?'3x':'1x'} icon={ faFileCsv }/>
           </MyButton>
         </Tooltip>
       </Grid>
@@ -90,7 +93,7 @@ const FileDownloads = (props) => {
               handleDelete(props.ids);
             }}
           >
-            <FontAwesomeIcon size='2x' icon={ faTrash }/>
+            <FontAwesomeIcon size={screenSize.width > 1000?'3x':'1x'} icon={ faTrash }/>
           </MyButton>
         </Tooltip>
       </Grid>

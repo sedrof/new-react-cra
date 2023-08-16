@@ -1,0 +1,275 @@
+.householdconfigChild {
+    position: absolute;
+    top: 108px;
+    left: 21px;
+    border-radius: var(--br-3xl);
+    background-color: #fffcfc;
+    width: 307.38px;
+    height: 280px;
+  }
+  .householdConfig {
+    position: absolute;
+    top: 0;
+    left: 81.08px;
+    transform: rotate(0.16deg);
+    transform-origin: 0 0;
+  }
+  .householdconfig {
+    position: absolute;
+    top: 328px;
+    left: 0;
+    border-radius: var(--br-3xl);
+    background-color: var(--color-honeydew);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 375px;
+    height: 894px;
+  }
+  .tenantBalanceOver,
+  .tenantSummaryInformation {
+    position: absolute;
+    top: -1px;
+    left: 748.1px;
+    transform: rotate(0.16deg);
+    transform-origin: 0 0;
+  }
+  .tenantSummaryInformation {
+    top: 1px;
+    left: 0.08px;
+  }
+  .frame1 {
+    position: absolute;
+    top: 19px;
+    left: 118.99px;
+    width: 1367.08px;
+    height: 30.97px;
+    overflow: hidden;
+  }
+  .tenantsummaryinfo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xl);
+    background-color: var(--color-honeydew);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 1818px;
+    height: 274px;
+  }
+  .contactType {
+    position: relative;
+  }
+  .property1defaultChild {
+    position: relative;
+    border-radius: var(--br-xs);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    width: 212px;
+    height: 40px;
+  }
+  .property1default,
+  .property1variant2,
+  .property1variant3,
+  .property1variant4,
+  .property1variant5,
+  .property1variant6 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-9xs);
+  }
+  .property1variant2,
+  .property1variant3,
+  .property1variant4,
+  .property1variant5,
+  .property1variant6 {
+    top: 105px;
+  }
+  .property1variant3,
+  .property1variant4,
+  .property1variant5,
+  .property1variant6 {
+    top: 190px;
+  }
+  .property1variant4,
+  .property1variant5,
+  .property1variant6 {
+    top: 275px;
+  }
+  .property1variant5,
+  .property1variant6 {
+    top: 360px;
+  }
+  .property1variant6 {
+    top: 445px;
+  }
+  .property1defaultParent {
+    top: 77px;
+    left: 55px;
+    width: 232px;
+    height: 616px;
+  }
+  .property1defaultContainer,
+  .property1defaultGroup,
+  .property1defaultParent {
+    position: absolute;
+    border-radius: var(--br-8xs);
+    overflow: hidden;
+  }
+  .property1defaultGroup {
+    top: calc(50% - 289px);
+    left: calc(50% - 126px);
+    width: 252px;
+    height: 615.83px;
+  }
+  .property1defaultContainer {
+    top: 101px;
+    left: 0;
+    width: 244px;
+    height: 531px;
+  }
+  .frame2 {
+    position: absolute;
+    top: -24px;
+    left: 989px;
+    width: 350.03px;
+    height: 632px;
+    overflow: hidden;
+  }
+  .tenantInformation {
+    position: absolute;
+    top: 0;
+    left: 592.08px;
+    font-size: var(--font-size-5xl);
+    display: inline-block;
+    width: 349.94px;
+    height: 29.04px;
+    transform: rotate(0.16deg);
+    transform-origin: 0 0;
+  }
+  .tenantinformation {
+    position: absolute;
+    top: 328px;
+    left: 422px;
+    border-radius: var(--br-3xl);
+    background-color: var(--color-honeydew);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 1396px;
+    height: 732px;
+    mix-blend-mode: normal;
+    font-size: var(--font-size-mid);
+  }
+  .rentBalance1 {
+    margin: 0;
+    padding-left: var(--padding-xl);
+  }
+  .rentBalance,
+  .rentBalance2 {
+    position: absolute;
+    top: 154px;
+    left: 25px;
+    display: inline-block;
+    width: 230px;
+    height: 19px;
+  }
+  .rentBalance2 {
+    top: 99px;
+    width: 229px;
+    height: 18px;
+  }
+  .propertyInformation,
+  .rentBalance4 {
+    position: absolute;
+    top: 127px;
+    left: 25px;
+    display: inline-block;
+    width: 215px;
+  }
+  .propertyInformation {
+    top: 13px;
+    left: 128px;
+    font-size: var(--font-size-5xl);
+    font-family: var(--font-inter);
+    width: 251.88px;
+  }
+  .propertyinformationChild {
+    position: absolute;
+    top: 228px;
+    left: 62.35px;
+    border-radius: var(--br-3xl);
+    background-color: #fffdfd;
+    width: 384.06px;
+    height: 380px;
+  }
+  .propertyinformation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xl);
+    background-color: var(--color-honeydew);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 510px;
+    height: 657px;
+  }
+  .tenancyInformation1 {
+    margin: 0;
+  }
+  .tenancyInformation {
+    position: absolute;
+    top: 23px;
+    left: 140.08px;
+    display: inline-block;
+    width: 349.94px;
+    height: 29.04px;
+    transform: rotate(0.16deg);
+    transform-origin: 0 0;
+  }
+  .tenancyinformation {
+    position: absolute;
+    top: 678px;
+    left: 0;
+    border-radius: var(--br-3xl);
+    background-color: var(--color-honeydew);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 495px;
+    height: 544px;
+    font-size: var(--font-size-5xl);
+    font-family: var(--font-inter);
+  }
+  .frame,
+  .frame3 {
+    position: absolute;
+    height: 1270px;
+    overflow: hidden;
+  }
+  .frame3 {
+    top: 0;
+    left: 1864px;
+    width: 510px;
+    font-size: var(--font-inherit);
+    font-family: var(--font-inherit);
+  }
+  .frame {
+    top: 38px;
+    left: 60px;
+    border: 1px solid var(--color-black);
+    box-sizing: border-box;
+    width: 2374px;
+  }
+  .contactDetail {
+    position: relative;
+    background-color: var(--color-white);
+    width: 2442px;
+    height: 1430px;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-5xl);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+  }
+
+
+  
