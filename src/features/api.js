@@ -28,14 +28,14 @@ export const getTransactions = createAsyncThunk(
   }
 );
 
-export const getFamilyMembers = createAsyncThunk(
-  "api/getFamilyMembers",
+export const getContacts = createAsyncThunk(
+  "api/getContacts",
   async ({ page, newSearch }, thunkAPI) => {
     try {
       const authState = thunkAPI.getState().user; // get the auth state
       const access_token = authState.access;
       const res = await axios.get(
-        `${process.env.REACT_APP_END_URL}calc/family-members`,
+        `${process.env.REACT_APP_END_URL}household/contacts`,
         config(access_token)
       );
       const data = await res.data;
@@ -325,7 +325,6 @@ export const getSingleTransaction = createAsyncThunk(
 export const getSingleFamilymemberTransaction = createAsyncThunk(
   "api/getSingleFamilymemberTransaction",
   async (ids, thunkAPI) => {
-    console.log(ids, 'from redux')
     try {
       const access_key = Cookies.get("access_token");
       const res = await axios.get(
@@ -401,14 +400,14 @@ const transactionSlice = createSlice({
         state.loading = false;
         // state.count = null;
       })
-      .addCase(getFamilyMembers.pending, (state, action) => {
+      .addCase(getContacts.pending, (state, action) => {
         state.loading = true;
       })
-      .addCase(getFamilyMembers.fulfilled, (state, action) => {
+      .addCase(getContacts.fulfilled, (state, action) => {
         state.loading = false;
         state.family_members = action.payload;
       })
-      .addCase(getFamilyMembers.rejected, (state) => {
+      .addCase(getContacts.rejected, (state) => {
         state.loading = false;
         // state.count = null;
       })

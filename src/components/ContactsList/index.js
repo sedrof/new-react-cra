@@ -80,6 +80,19 @@ const ContactsList = (props) => {
   };
   const selectedTransactionIdsRef = useRef([]);
 
+  const getCellValue = (column, contact) => {
+    switch (column.id) {
+      case "relationship":
+        return contact.contact_type;
+      case "family_group":
+        return contact.family_group.name;
+      case "income":
+        return contact.contact_income[0].weekly_assessable_income;
+      default:
+        return String(contact[column.id]);
+    };
+  };
+
   return (
     <Paper sx={{ width: '90%', overflow: 'hidden', marginTop:'50px' }}>
       <TableContainer sx={{ maxHeight: '100%' }}>
@@ -126,16 +139,13 @@ const ContactsList = (props) => {
                               </TableCell>
                             );
                           }
-                        const value =
-                        column.id === "relationship"
-                            ? contact.relationship.display_name
-                            : contact[column.id];
+                          const value = getCellValue(column, contact);
 
                         return (
                         <TableCell key={column.id} align={column.align}>
                             {column.format && typeof value === "number"
                             ? column.format(value)
-                            : value}
+                            : String(value)}
                         </TableCell>
                         );
                     })}

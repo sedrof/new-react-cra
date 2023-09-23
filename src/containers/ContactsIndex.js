@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Box,
@@ -10,13 +10,12 @@ import {
 import { useDebounce } from "use-debounce";
 import ContactsList from "components/ContactsList";
 import Layout from "components/Layout";
-import { getFamilyMembers } from "features/api";
+import { getContacts } from "features/api";
 
 
 
 
 const ContactsIndex = (props) => {
-  const navigate = useNavigate();
   const [page, setPage] = React.useState(0);
   const [search, setSearch] = React.useState("");
   const [newSearch] = useDebounce(search, 100);
@@ -25,7 +24,7 @@ const ContactsIndex = (props) => {
 
   
   React.useEffect(() => {
-    dispatch(getFamilyMembers({ page, newSearch }));
+    dispatch(getContacts({ page, newSearch }));
   }, [family_members?.length]);
 
     const { numSelected, updateListOfIds } = props
